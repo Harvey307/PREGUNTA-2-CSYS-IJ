@@ -84,4 +84,15 @@ public class InventoryManagerTest {
         });
         assertEquals("El nombre del producto no puede estar vacío", ex.getMessage());
     }
+    @Test
+    public void testNombreMuyLargo() {
+        InventoryManager manager = new InventoryManager();
+
+        // EL MAXIMO ES 50
+        String nombreLargo = "A".repeat(51);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            manager.addItem(nombreLargo, 10);
+        });
+    }
 }
