@@ -63,5 +63,25 @@ public class InventoryManagerTest {
             manager.addItem("Monitor", 1001);
         });
     }
+   //TEST AGREGADOS PARA MEJOR COBERTURA Y RAMAS
 
+    @Test
+    public void testConsultarStockInexistente() {
+        InventoryManager manager = new InventoryManager();
+
+        // Consultamos un producto que NO hemos agregado
+        int stock = manager.getStock("ProductoFantasma");
+
+        // Debería devolver 0 porque no existe en el mapa
+        assertEquals(0, stock);
+    }
+    //AGREGAMOS UN VACIO PERO AGREGAREMOS UN TEST PARA EL NULL POR LAS DUDAS
+    @Test
+    public void testNombreNulo() {
+        InventoryManager manager = new InventoryManager();
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> {
+            manager.addItem(null, 5);
+        });
+        assertEquals("El nombre del producto no puede estar vacío", ex.getMessage());
+    }
 }
